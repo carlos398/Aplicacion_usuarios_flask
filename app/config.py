@@ -1,4 +1,6 @@
 from logging import DEBUG
+import usuario
+
 
 
 class Config(object):
@@ -7,8 +9,8 @@ class Config(object):
     MAIL_PORT = 465
     MAIL_USE_SSL = True
     MAIL_USE_TLS = False
-    MAIL_USERNAME = 'ouremail@gmail.com'
-    MAIL_PASSWORD = 'ourpassword'
+    MAIL_USERNAME = usuario.user_email
+    MAIL_PASSWORD = usuario.email_password
 
 
 class DevelopmentConfig(Config):
