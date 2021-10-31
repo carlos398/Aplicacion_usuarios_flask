@@ -1,0 +1,34 @@
+{% extends 'layout.html' %}
+
+{%  block title %} Charls-Book {% endblock %}
+
+{% block body  %}
+{% from "macros.html" import show_form %}
+
+    <div class="row mt-xl-5 justify-content-lg-center">
+        <div class="col-sm-5">
+            <div class="card border-info mb-3">
+                <div class="card-header" style="text-align: center;">Register form</div>
+                <form action="" method="POST" class="form-control">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-group row">
+                        {{show_form(form.username, class="form-control")}}
+                    </div>
+                    <div class="form-group row">
+                        {{show_form(form.email, class="form-control")}}
+                    </div>
+                    <div class="form-group row">
+                        {{show_form(form.password, class="form-control")}}
+                    </div>
+                    <div class="form-group ">
+                        <button type="submit" class="form-control btn btn-success "> Register </button>
+                    </div>
+                    <div class="col-sm-5">
+                        <a href="/" class="form-control btn btn-outline-danger mt-2">Go to login</a>
+                    </div>
+                    
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

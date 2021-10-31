@@ -1,0 +1,35 @@
+{% extends 'layout.html' %}
+
+{%  block title %} Charls-Book {% endblock %}
+
+{% block body  %}
+{% from "macros.html" import show_form %}
+    <div class="row mt-xl-5 justify-content-lg-center">
+        <div class="col-sm-5">
+            <div class="card border-info mb-3">
+                <div class="card-header " style="text-align: center;"> LOGIN </div>
+                <form action="" method="POST" class="form-control">
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-group row">
+                        {{show_form(form.username, class="form-control")}}
+                    </div>
+                    <div class="form-group row">
+                        {{show_form(form.password, class="form-control")}}
+                    </div>
+                    {{show_form(form.honeypot)}}
+                    <div class="form-group">
+                        <button type="submit" class="form-control btn btn-success"> LOGIN <i class="fas fa-sign-in-alt"></i></button>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <a href="/register" class="form-control btn btn-outline-info mt-2" style="text-transform: uppercase;">Register here</a>
+                        </div>
+                        <div class="col-sm-2">
+                            <a href="https://github.com/carlos398/Aplicacion_usuarios_flask" class="form-control btn btn-outline-success mt-2 p-lg-0" style="font-size: 30px;"><i class="fab fa-github"></i></a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}
