@@ -57,7 +57,7 @@ def login():
             flash(succes_message)
             session['username']= username
             session['user_id'] = user.id
-            redirect(url_for('/'))
+            return redirect(url_for('index'))
         else:
             error_message = 'usuario o contraseña no validos'
             flash(error_message)
