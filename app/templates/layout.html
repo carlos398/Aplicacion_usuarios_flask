@@ -13,6 +13,9 @@
     <title>{%  block title %}  {% endblock %}</title>
 </head>
 <body>
+    {% block nav %}
+
+    {% endblock %}
     <div class="messages col-md-4" style="text-align: center; margin-left: auto; margin-right: auto; text-transform: uppercase;">
         {% with messages = get_flashed_messages() %}
             {% if messages %}

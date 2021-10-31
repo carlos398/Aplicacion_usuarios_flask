@@ -2,7 +2,52 @@
 
 {% block title %} ThejrWeb {% endblock %}
 
+{% block nav %}
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#" style="text-transform: uppercase; padding-left: 8px;">{{user}}</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarColor01" aria-controls="navbarColor01" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+            </button>
+
+            <div class="collapse navbar-collapse" id="navbarColor01">
+            <ul class="navbar-nav me-auto">
+                <li class="nav-item">
+                <a class="nav-link active" href="/">HOME
+                    <span class="visually-hidden">(current)</span>
+                </a>
+                </li>
+            </ul>
+            <form class="d-flex">
+                <a href="/logout" class="form-control btn btn-outline-warning mt-2 p-lg-1" style=" font-size: 20px; color: white;">LOGOUT</a>
+            </form>
+            </div>
+        </div>
+    </nav>
+{% endblock %}
 {% block body %}
-    <h1>hola</h1>
-    <a href="/logout"> LOGOUT </a>
+    {% from 'macros.html' import show_form%}
+        <div class="row mt-sm-4 justify-content-lg-center">
+            <div class="col-sm-7">
+                <form action="" method="POST" class="form-control" >
+                    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                    <div class="form-group row">
+                        {{show_form(form.post, class = 'form-control', placeholder="Que estas pensando?")}}
+                    </div>
+                    <div class="form-group row">
+                        {{show_form(form.honeypot, class = 'form-control')}}
+                    </div>
+                    <button type="submit" class="form-control btn btn-success mt-2 p-lg-1">Publicar</button>
+                </form>
+            </div>
+        </div>
+        <div>
+            {% if posts %}
+                {% for post in posts %}
+                    <p>{{post.username}}</p>
+                    <p>{{post.text}}</p>
+                    <p>{{post.created_date}}</p>
+                {% endfor %}
+            {% endif %}
+        </div>
 {% endblock %}

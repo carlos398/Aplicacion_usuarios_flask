@@ -1,7 +1,7 @@
 from flask import Flask, request, redirect, render_template, flash, url_for, copy_current_request_context,session
 from flask_wtf import CsrfProtect
 #Models
-from modelos import db, User
+from modelos import db, User, Post
 #Forms
 import forms
 #configs
@@ -38,10 +38,34 @@ def before_request():
         return redirect(url_for('index'))
 
 
+def show_posts():
+    post_list = Post.query.join(User).add_columns(
+        User.username,
+        Post.text,
+        Post.created_date).order_by(Post.created_date.desc())
+    return post_list
+
+
 @app.route('/', methods = ['GET', 'POST'])
 def index():
-    
-    return render_template('index.html')
+    post_form = forms.Post_form(request.form)
+    if request.method == 'POST' and post_form.validate():
+        user_id = session['user_id']
+        post = Post(
+            user_id = user_id,
+            text = post_form.post.data)
+        db.session.add(post)
+        db.session.commit()
+
+        succes_message = 'Se ha realizado la publicacion'
+        flash(succes_message)
+        
+        
+
+        return redirect(url_for('index'))
+    username = session['username']
+    all_posts = show_posts()
+    return render_template('index.html', user = username, form = post_form, posts = all_posts)
 
 
 @app.route('/login', methods = ['GET', 'POST'])
