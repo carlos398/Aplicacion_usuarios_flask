@@ -41,13 +41,19 @@
                 </form>
             </div>
         </div>
-        <div>
-            {% if posts %}
-                {% for post in posts %}
-                    <p>{{post.username}}</p>
-                    <p>{{post.text}}</p>
-                    <p>{{post.created_date}}</p>
-                {% endfor %}
-            {% endif %}
+        <div class="row mt-sm-8 justify-content-lg-center mt-3">
+            <div class="col-sm-7">
+                {% if posts %}
+                    {% for post in posts %}
+                        <div class="card border-secondary mb-3">
+                            <h4 class="card-header" style="font-size: 17px;">{{post.username}}</h4>
+                            <div class="card-body">
+                                <p class="card-text" style="font-size: 20px;">{{post.text}}</p>
+                                <p class="card-text" style="font-size: 12px;">{{post.created_date}}</p>
+                            </div>
+                        </div>
+                    {% endfor %}
+                {% endif %}
+            </div>
         </div>
 {% endblock %}

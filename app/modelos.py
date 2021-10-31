@@ -13,7 +13,6 @@ class User(db.Model):
     email = db.Column(db.String(60), unique=True)
     password = db.Column(db.String(255))
     posts = db.relationship('Post')
-    comment = db.relationship('Comment')
     create_date = db.Column(db.DateTime, default=datetime.datetime.now)
 
 
@@ -37,17 +36,5 @@ class Post(db.Model):
 
     id = db.Column(db.Integer, primary_key=True)
     user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    text = db.Column(db.Text())
-    num_reacciones = db.Column(db.Integer)
-    created_date = db.Column(db.DateTime, default=datetime.datetime.now)
-
-
-class Comment(db.Model):
-    __tablename__ = 'coments'
-
-
-    id = db.Column(db.Integer, primary_key=True)
-    user_id = db.Column(db.Integer, db.ForeignKey('users.id'))
-    post_id = db.Column(db.Integer, db.ForeignKey('posts.id'))
     text = db.Column(db.Text())
     created_date = db.Column(db.DateTime, default=datetime.datetime.now)
